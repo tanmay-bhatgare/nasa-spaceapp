@@ -7,11 +7,11 @@ import { MapPin, Loader2 } from "lucide-react"
 import { GeocodingResult, GeocodingResponse, SelectedLocation } from "@/types/weather"
 
 interface LocationSelectorProps {
-  selectedLocation: SelectedLocation | null
-  onLocationChange: (location: SelectedLocation | null) => void
+  onLocationSelect: (location: { lat: number; lng: number; name: string } | null) => void
 }
 
-export default function LocationSelector({ selectedLocation, onLocationChange }: LocationSelectorProps) {
+export default function LocationSelector({ onLocationSelect }: LocationSelectorProps) {
+  const [selectedLocation, setSelectedLocation] = useState<SelectedLocation | null>(null)
   const [searchQuery, setSearchQuery] = useState("")
   const [searchResults, setSearchResults] = useState<GeocodingResult[]>([])
   const [isSearching, setIsSearching] = useState(false)
@@ -80,10 +80,19 @@ export default function LocationSelector({ selectedLocation, onLocationChange }:
       admin2: result.admin2
     }
     
-    onLocationChange(location)
-    setSearchQuery("")
+    // Update internal state
+    setSelectedLocation(location)
+    setSearchQuery(location.displayName)
     setSearchResults([])
     setShowResults(false)
+    
+    // Call parent callback with expected format
+    onLocationSelect({
+      lat: result.latitude,
+      lng: result.longitude,
+      name: location.displayName
+    })
+    
     if (inputRef.current) {
       inputRef.current.blur()
     }
@@ -99,14 +108,20 @@ export default function LocationSelector({ selectedLocation, onLocationChange }:
   // Handle click outside to close results
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (resultsRef.current && !resultsRef.current.contains(event.target as Node) && 
-          inputRef.current && !inputRef.current.contains(event.target as Node)) {
+      const target = event.target as Node
+      if (resultsRef.current && !resultsRef.current.contains(target) && 
+          inputRef.current && !inputRef.current.contains(target)) {
         setShowResults(false)
       }
     }
 
-    document.addEventListener('mousedown', handleClickOutside)
+    // Use a slight delay to ensure click events on options are processed first
+    const timeoutId = setTimeout(() => {
+      document.addEventListener('mousedown', handleClickOutside)
+    }, 0)
+
     return () => {
+      clearTimeout(timeoutId)
       document.removeEventListener('mousedown', handleClickOutside)
     }
   }, [])
@@ -172,12 +187,20 @@ export default function LocationSelector({ selectedLocation, onLocationChange }:
                 {!isSearching && searchResults.length > 0 && (
                   <div className="py-1">
                     {searchResults.map((result) => (
-                      <div
+                      <button
                         key={result.id}
-                        className="px-3 py-2 hover:bg-muted cursor-pointer transition-colors"
-                        onClick={() => handleLocationSelect(result)}
+                        type="button"
+                        className="w-full px-3 py-2 hover:bg-muted cursor-pointer transition-colors text-left focus:bg-muted focus:outline-none"
+                        onClick={(e) => {
+                          e.preventDefault()
+                          e.stopPropagation()
+                          handleLocationSelect(result)
+                        }}
+                        onMouseDown={(e) => {
+                          e.preventDefault()
+                        }}
                       >
-                        <div className="flex items-center space-x-2">
+                        <div className="flex items-center space-x-2 pointer-events-none">
                           <MapPin className="h-4 w-4 flex-shrink-0 text-muted-foreground" />
                           <div className="flex-1 min-w-0">
                             <div className="font-medium truncate">{result.name}</div>
@@ -190,7 +213,7 @@ export default function LocationSelector({ selectedLocation, onLocationChange }:
                             {result.latitude.toFixed(2)}, {result.longitude.toFixed(2)}
                           </div>
                         </div>
-                      </div>
+                      </button>
                     ))}
                   </div>
                 )}
