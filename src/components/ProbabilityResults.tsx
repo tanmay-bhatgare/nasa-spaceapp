@@ -102,7 +102,7 @@ const ProbabilityResults = ({ location, date, variables, coordinates }: Probabil
       <Card className="p-6 backdrop-blur-sm bg-card/80 border-primary/20 shadow-[var(--shadow-soft)]">
         <div className="flex items-center justify-center py-20">
           <Loader2 className="h-8 w-8 animate-spin text-primary mr-3" />
-          <span className="text-lg text-muted-foreground">Loading weather data from Open-Meteo API...</span>
+          <span className="text-lg text-muted-foreground">Loading weather data from POWER API...</span>
         </div>
       </Card>
     );
