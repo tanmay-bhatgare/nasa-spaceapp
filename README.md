@@ -1,4 +1,4 @@
-## Project info
+## Information Of Product
 
 **URL**: https://lovable.dev/projects/6447881d-187d-43ee-9680-1e48b455dd87
 
