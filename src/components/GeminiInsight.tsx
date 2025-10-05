@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const API_KEY = process.env.GEMINI_API;
+const API_KEY = import.meta.env.VITE_GEMINI_API;
 const MODEL = "gemini-2.5-flash"; // or whichever is available in your API access
 interface GeminiInsightProps {
   trigger?: number; // optional if you want refresh later
