@@ -136,7 +136,7 @@ export default function LocationSelector({ onLocationSelect }: LocationSelectorP
   }, [debounceTimer])
 
   return (
-    <Card className="p-6 backdrop-blur-sm bg-card/80 border-primary/20 shadow-[var(--shadow-soft)]">
+    <Card className="p-6 backdrop-blur-sm bg-card/80 border-primary/20 shadow-[var(--shadow-soft)] overflow-visible">
       <div className="space-y-4">
         <div className="flex items-center gap-2">
           <MapPin className="h-5 w-5 text-primary" />
@@ -163,7 +163,7 @@ export default function LocationSelector({ onLocationSelect }: LocationSelectorP
             {showResults && (
               <div 
                 ref={resultsRef}
-                className="absolute z-50 w-full mt-1 bg-background border border-border rounded-md shadow-lg max-h-60 overflow-y-auto"
+                className="absolute z-[100] w-full mt-1 bg-card border border-primary/30 rounded-md shadow-xl max-h-60 overflow-y-auto backdrop-blur-sm"
               >
                 {isSearching && (
                   <div className="flex items-center justify-center py-4">
