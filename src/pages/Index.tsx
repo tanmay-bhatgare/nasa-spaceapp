@@ -143,6 +143,7 @@ const Index = () => {
               location={location.name}
               date={selectedDate}
               variables={selectedVariables}
+              coordinates={{ lat: location.lat, lng: location.lng }}
             />
           </div>
         </section>
@@ -151,8 +152,8 @@ const Index = () => {
       {/* Footer */}
       <footer className="border-t border-primary/20 py-8 mt-16">
         <div className="container mx-auto px-4 text-center text-sm text-muted-foreground">
-          <p>Powered by NASA Earth Observation Data • Historical Weather Analysis Platform</p>
-          <p className="mt-2">Data sources: NASA POWER, MODIS, GPM, and other Earth observation satellites</p>
+          <p>Powered by Open-Meteo Historical Weather Data • Historical Weather Analysis Platform</p>
+          <p className="mt-2">Data sources: Open-Meteo Archive API with historical weather observations</p>
         </div>
       </footer>
     </div>

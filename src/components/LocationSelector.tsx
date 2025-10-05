@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect, useCallback, useRef } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { MapPin, Loader2 } from "lucide-react"
 import { GeocodingResult, GeocodingResponse, SelectedLocation } from "@/types/weather"
@@ -136,17 +136,17 @@ export default function LocationSelector({ onLocationSelect }: LocationSelectorP
   }, [debounceTimer])
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center space-x-2">
-          <MapPin className="h-5 w-5" />
-          <span>Select Location</span>
-        </CardTitle>
-        <CardDescription>
+    <Card className="p-6 backdrop-blur-sm bg-card/80 border-primary/20 shadow-[var(--shadow-soft)]">
+      <div className="space-y-4">
+        <div className="flex items-center gap-2">
+          <MapPin className="h-5 w-5 text-primary" />
+          <h3 className="text-lg font-semibold text-foreground">Select Location</h3>
+        </div>
+
+        <p className="text-sm text-muted-foreground">
           Search for a location to analyze weather conditions
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
+        </p>
+
         <div className="space-y-4">
           <div className="relative">
             <label className="text-sm font-medium mb-2 block">Location</label>
@@ -238,7 +238,7 @@ export default function LocationSelector({ onLocationSelect }: LocationSelectorP
             </div>
           )}
         </div>
-      </CardContent>
+      </div>
     </Card>
   )
 }
