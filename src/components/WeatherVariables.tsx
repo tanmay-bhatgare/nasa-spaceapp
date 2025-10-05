@@ -30,7 +30,7 @@ const WeatherVariables = ({ onVariablesChange }: WeatherVariablesProps) => {
   };
 
   return (
-    <Card className="p-6 backdrop-blur-sm bg-card/80 border-primary/20 shadow-[var(--shadow-soft)]">
+    <Card className="p-6 backdrop-blur-sm bg-card/80 border-primary/20 shadow-[var(--shadow-soft)] -z-20">
       <div className="space-y-4">
         <h3 className="text-lg font-semibold text-foreground mb-4">Weather Variables</h3>
         

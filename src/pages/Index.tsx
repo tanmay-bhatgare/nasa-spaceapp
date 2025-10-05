@@ -87,7 +87,7 @@ const Index = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 text-left">
               <div className="p-6 backdrop-blur-sm bg-card/60 rounded-xl border border-primary/20">
                 <Database className="h-8 w-8 text-primary mb-3" />
-                <h3 className="font-semibold text-foreground mb-2">20+ Years of Data</h3>
+                <h3 className="font-semibold text-foreground mb-2">1+ Year of Data</h3>
                 <p className="text-sm text-muted-foreground">Historical patterns from decades of NASA observations</p>
               </div>
               <div className="p-6 backdrop-blur-sm bg-card/60 rounded-xl border border-primary/20">
