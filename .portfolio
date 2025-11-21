@@ -1,0 +1,14 @@
+{
+  "name": "NASA Space App",
+  "description": "A Weather Forecasting App, a part of NASA Space App Hackathon. It was the project of Team Orion.",
+  "tech": [
+    "React",
+    "Typescript",
+    "Tailwindcss",
+    "External APIs",
+    "Google GenAI",
+    ""
+  ],
+  "github": "https://www.github.com/tanmay-bhatgare/nasa-spaceapp",
+  "featured": true
+}
